@@ -18,6 +18,7 @@ import {
   makeSelectError,
 } from 'containers/App/selectors'
 import { getPopularMoviesRequest } from 'containers/App/actions'
+import MovieRail from 'components/MovieRail'
 import saga from './saga'
 
 const key = 'home'
@@ -40,6 +41,12 @@ export function HomePage({ loading, error, popularMovies, getPopularMovies }) {
           content="A Movie Shop eCommerce application homepage"
         />
       </Helmet>
+
+      <MovieRail
+        title="popularMoviesHeader"
+        movies={popularMovies}
+        loading={loading}
+      />
     </article>
   )
 }
