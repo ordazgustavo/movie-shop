@@ -9,22 +9,22 @@ const selectGlobal = state => state.global || initialState
 
 const selectRouter = state => state.router
 
-const makeSelectLoading = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.loading,
-  )
-
-const makeSelectError = () =>
-  createSelector(
-    selectGlobal,
-    globalState => globalState.error,
-  )
-
 const makeSelectPopularMovies = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.popularMovies.results,
+    globalState => globalState.popularMovies,
+  )
+
+const makeSelectTopRatedMovies = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.topRatedMovies,
+  )
+
+const makeSelectUpcomingMovies = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.upcomingMovies,
   )
 
 const makeSelectLocation = () =>
@@ -35,8 +35,8 @@ const makeSelectLocation = () =>
 
 export {
   selectGlobal,
-  makeSelectLoading,
-  makeSelectError,
   makeSelectPopularMovies,
+  makeSelectTopRatedMovies,
+  makeSelectUpcomingMovies,
   makeSelectLocation,
 }

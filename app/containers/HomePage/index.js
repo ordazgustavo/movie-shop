@@ -14,23 +14,38 @@ import { createStructuredSelector } from 'reselect'
 import { useInjectSaga } from 'utils/injectSaga'
 import {
   makeSelectPopularMovies,
-  makeSelectLoading,
-  makeSelectError,
+  makeSelectTopRatedMovies,
+  makeSelectUpcomingMovies,
 } from 'containers/App/selectors'
-import { getPopularMoviesRequest } from 'containers/App/actions'
+import {
+  getPopularMoviesRequest,
+  getTopRatedMoviesRequest,
+  getUpcomingMoviesRequest,
+} from 'containers/App/actions'
 import MovieRail from 'components/MovieRail'
 import saga from './saga'
 
 const key = 'home'
 
-export function HomePage({ loading, error, popularMovies, getPopularMovies }) {
+export function HomePage({
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+  popularMovies,
+  topRatedMovies,
+  upcomingMovies,
+}) {
   useInjectSaga({ key, saga })
 
   useEffect(() => {
     getPopularMovies()
+    getTopRatedMovies()
+    getUpcomingMovies()
   }, [])
 
-  console.log(loading, popularMovies, error)
+  console.log('Popular Movies', popularMovies)
+  console.log('Top Rated Movies', topRatedMovies)
+  console.log('Upcoming Movies', upcomingMovies)
 
   return (
     <article>
@@ -44,18 +59,30 @@ export function HomePage({ loading, error, popularMovies, getPopularMovies }) {
 
       <MovieRail
         title="popularMoviesHeader"
-        movies={popularMovies}
-        loading={loading}
+        movies={popularMovies.data}
+        loading={popularMovies.loading}
+      />
+      <MovieRail
+        title="topRatedMoviesHeader"
+        movies={topRatedMovies.data}
+        loading={topRatedMovies.loading}
+      />
+      <MovieRail
+        title="upcomingMoviesHeader"
+        movies={upcomingMovies.data}
+        loading={upcomingMovies.loading}
       />
     </article>
   )
 }
 
 HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  popularMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   getPopularMovies: PropTypes.func,
+  getTopRatedMovies: PropTypes.func,
+  getUpcomingMovies: PropTypes.func,
+  popularMovies: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  topRatedMovies: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  upcomingMovies: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 }
 
 export function mapDispatchToProps(dispatch) {
@@ -63,13 +90,19 @@ export function mapDispatchToProps(dispatch) {
     getPopularMovies: () => {
       dispatch(getPopularMoviesRequest())
     },
+    getTopRatedMovies: () => {
+      dispatch(getTopRatedMoviesRequest())
+    },
+    getUpcomingMovies: () => {
+      dispatch(getUpcomingMoviesRequest())
+    },
   }
 }
 
 const mapStateToProps = createStructuredSelector({
   popularMovies: makeSelectPopularMovies(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+  topRatedMovies: makeSelectTopRatedMovies(),
+  upcomingMovies: makeSelectUpcomingMovies(),
 })
 
 const withConnect = connect(

@@ -17,4 +17,12 @@ export default defineMessages({
     id: `${scope}.popular_movies.header`,
     defaultMessage: 'Popular Movies',
   },
+  topRatedMoviesHeader: {
+    id: `${scope}.top_rated_movies.header`,
+    defaultMessage: 'Top Rated Movies',
+  },
+  upcomingMoviesHeader: {
+    id: `${scope}.upcoming_movies.header`,
+    defaultMessage: 'Upcoming Movies',
+  },
 })
