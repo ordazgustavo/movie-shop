@@ -22,6 +22,7 @@ import {
   getTopRatedMoviesRequest,
   getUpcomingMoviesRequest,
 } from 'containers/App/actions'
+import GenreFilter from 'containers/GenreFilter/Loadable'
 import MovieRail from 'components/MovieRail'
 import saga from './saga'
 
@@ -56,6 +57,8 @@ export function HomePage({
           content="A Movie Shop eCommerce application homepage"
         />
       </Helmet>
+
+      <GenreFilter />
 
       <MovieRail
         title="popularMoviesHeader"
