@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { IMAGE_PREFIX_SMALL_URL } from '../../constants'
 
@@ -23,16 +24,19 @@ const Item = styled.li`
 `
 const Image = styled.img``
 
-export function MovieItem({ image, name }) {
+export function MovieItem({ id, image, name }) {
   return (
-    <Item>
-      <Image src={`${IMAGE_PREFIX_SMALL_URL}${image}`} alt={name} />
-      <Description>{name}</Description>
-    </Item>
+    <Link to={`/movie/${id}`}>
+      <Item>
+        <Image src={`${IMAGE_PREFIX_SMALL_URL}${image}`} alt={name} />
+        <Description>{name}</Description>
+      </Item>
+    </Link>
   )
 }
 
 MovieItem.propTypes = {
+  id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

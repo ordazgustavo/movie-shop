@@ -40,6 +40,7 @@ function MovieRail({ title, movies, loading }) {
           movies.map(movie => (
             <MovieItem
               key={movie.id}
+              id={movie.id}
               image={movie.backdrop_path}
               name={movie.original_title}
             />
