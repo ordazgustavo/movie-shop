@@ -31,6 +31,7 @@ const genreFilterReducer = (state = initialState, action) =>
       case GET_GENRES_SUCCESS:
         draft.loading = false
         draft.genres = action.genres.genres
+        draft.selectedGenre = action.genres.genres[0].id.toString()
         break
 
       case GET_GENRES_FAILURE:

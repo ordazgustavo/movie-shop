@@ -27,6 +27,12 @@ const makeSelectUpcomingMovies = () =>
     globalState => globalState.upcomingMovies,
   )
 
+const makeSelectMoviesByGenre = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.moviesByGenre,
+  )
+
 const makeSelectLocation = () =>
   createSelector(
     selectRouter,
@@ -38,5 +44,6 @@ export {
   makeSelectPopularMovies,
   makeSelectTopRatedMovies,
   makeSelectUpcomingMovies,
+  makeSelectMoviesByGenre,
   makeSelectLocation,
 }

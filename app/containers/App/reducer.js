@@ -18,10 +18,18 @@ import {
   GET_UPCOMING_MOVIES_REQUEST,
   GET_UPCOMING_MOVIES_SUCCESS,
   GET_UPCOMING_MOVIES_FAILURE,
+  GET_MOVIES_BY_GENRE_REQUEST,
+  GET_MOVIES_BY_GENRE_SUCCESS,
+  GET_MOVIES_BY_GENRE_FAILURE,
 } from './constants'
 
 // The initial state of the App
 export const initialState = {
+  moviesByGenre: {
+    error: false,
+    loading: false,
+    data: false,
+  },
   popularMovies: {
     error: false,
     loading: false,
@@ -43,6 +51,22 @@ export const initialState = {
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case GET_MOVIES_BY_GENRE_REQUEST:
+        draft.moviesByGenre.loading = true
+        draft.moviesByGenre.error = false
+        draft.moviesByGenre.data = false
+        break
+
+      case GET_MOVIES_BY_GENRE_SUCCESS:
+        draft.moviesByGenre.data = action.moviesByGenre.results
+        draft.moviesByGenre.loading = false
+        break
+
+      case GET_MOVIES_BY_GENRE_FAILURE:
+        draft.moviesByGenre.error = action.error
+        draft.moviesByGenre.loading = false
+        break
+
       case GET_POPULAR_MOVIES_REQUEST:
         draft.popularMovies.loading = true
         draft.popularMovies.error = false

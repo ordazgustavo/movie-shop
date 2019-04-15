@@ -13,6 +13,10 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the MovieRail component!',
   },
+  moviesByGenre: {
+    id: `${scope}.movies_by_genre.header`,
+    defaultMessage: 'Movies By Genre',
+  },
   popularMoviesHeader: {
     id: `${scope}.popular_movies.header`,
     defaultMessage: 'Popular Movies',

@@ -25,6 +25,9 @@ import {
   GET_UPCOMING_MOVIES_REQUEST,
   GET_UPCOMING_MOVIES_SUCCESS,
   GET_UPCOMING_MOVIES_FAILURE,
+  GET_MOVIES_BY_GENRE_REQUEST,
+  GET_MOVIES_BY_GENRE_SUCCESS,
+  GET_MOVIES_BY_GENRE_FAILURE,
 } from './constants'
 
 export function getPopularMoviesRequest() {
@@ -83,6 +86,26 @@ export function getUpcomingMoviesSuccess(upcomingMovies) {
 export function getUpcomingMoviesFailure(error) {
   return {
     type: GET_UPCOMING_MOVIES_FAILURE,
+    error,
+  }
+}
+
+export function getMoviesByGenreRequest() {
+  return {
+    type: GET_MOVIES_BY_GENRE_REQUEST,
+  }
+}
+
+export function getMoviesByGenreSuccess(moviesByGenre) {
+  return {
+    type: GET_MOVIES_BY_GENRE_SUCCESS,
+    moviesByGenre,
+  }
+}
+
+export function getMoviesByGenreFailure(error) {
+  return {
+    type: GET_MOVIES_BY_GENRE_FAILURE,
     error,
   }
 }
