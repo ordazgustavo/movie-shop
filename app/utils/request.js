@@ -38,9 +38,8 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(endpoint, options) {
-  const url = `https://api.themoviedb.org/3${endpoint}&api_key=${
-    process.env.THE_MOVIE_DB_API_KEY
-  }`
+  // The API key gets exposed on the network tab anyway...
+  const url = `https://api.themoviedb.org/3${endpoint}&api_key=e0156585ed9721bd3685fb5b8a13948c`
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
