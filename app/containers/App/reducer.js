@@ -21,10 +21,12 @@ import {
   GET_MOVIES_BY_GENRE_REQUEST,
   GET_MOVIES_BY_GENRE_SUCCESS,
   GET_MOVIES_BY_GENRE_FAILURE,
+  ADD_TO_CART,
 } from './constants'
 
 // The initial state of the App
 export const initialState = {
+  cart: [],
   moviesByGenre: {
     error: false,
     loading: false,
@@ -51,6 +53,10 @@ export const initialState = {
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case ADD_TO_CART:
+        draft.cart.push(action.movie)
+        break
+
       case GET_MOVIES_BY_GENRE_REQUEST:
         draft.moviesByGenre.loading = true
         draft.moviesByGenre.error = false

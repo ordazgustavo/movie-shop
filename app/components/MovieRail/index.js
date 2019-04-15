@@ -39,7 +39,7 @@ const Rail = styled.ul`
   }
 `
 
-function MovieRail({ title, subtitle, movies, loading }) {
+function MovieRail({ addToCartAction, title, subtitle, movies, loading }) {
   return (
     <Wrapper>
       <Title>
@@ -54,6 +54,7 @@ function MovieRail({ title, subtitle, movies, loading }) {
               id={movie.id}
               image={movie.backdrop_path}
               name={movie.title}
+              addToCartAction={() => addToCartAction(movie)}
             />
           ))
         ) : (
@@ -65,6 +66,7 @@ function MovieRail({ title, subtitle, movies, loading }) {
 }
 
 MovieRail.propTypes = {
+  addToCartAction: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   movies: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,

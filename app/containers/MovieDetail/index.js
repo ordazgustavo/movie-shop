@@ -14,6 +14,7 @@ import { compose } from 'redux'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
+import { addToCart } from 'containers/App/actions'
 import {
   makeSelectMovieDetail,
   makeSelectMovieDetailLoading,
@@ -40,6 +41,7 @@ const MovieTitle = styled.h1`
 
 export function MovieDetail({
   getMovieDetail,
+  addToCartAction,
   match,
   movieDetail,
   loading,
@@ -76,6 +78,9 @@ export function MovieDetail({
               {movieDetail.title}{' '}
               <span>({new Date(movieDetail.release_date).getFullYear()})</span>
             </MovieTitle>
+            <button type="button" onClick={() => addToCartAction(movieDetail)}>
+              Add to cart
+            </button>
             <h4>Overview</h4>
             <p>{movieDetail.overview}</p>
           </div>
@@ -89,6 +94,7 @@ export function MovieDetail({
 
 MovieDetail.propTypes = {
   getMovieDetail: PropTypes.func.isRequired,
+  addToCartAction: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   movieDetail: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
     .isRequired,
@@ -106,6 +112,9 @@ function mapDispatchToProps(dispatch) {
   return {
     getMovieDetail: id => {
       dispatch(getMovieDetailRequest(id))
+    },
+    addToCartAction: movie => {
+      dispatch(addToCart(movie))
     },
   }
 }

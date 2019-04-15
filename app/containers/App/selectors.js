@@ -9,6 +9,12 @@ const selectGlobal = state => state.global || initialState
 
 const selectRouter = state => state.router
 
+const makeSelectCart = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.cart,
+  )
+
 const makeSelectPopularMovies = () =>
   createSelector(
     selectGlobal,
@@ -41,6 +47,7 @@ const makeSelectLocation = () =>
 
 export {
   selectGlobal,
+  makeSelectCart,
   makeSelectPopularMovies,
   makeSelectTopRatedMovies,
   makeSelectUpcomingMovies,

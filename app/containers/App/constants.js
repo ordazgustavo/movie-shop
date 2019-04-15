@@ -9,6 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const ADD_TO_CART = 'shop/App/ADD_TO_CART'
+
 export const GET_POPULAR_MOVIES_REQUEST = 'shop/App/GET_POPULAR_MOVIES_REQUEST'
 export const GET_POPULAR_MOVIES_SUCCESS = 'shop/App/GET_POPULAR_MOVIES_SUCCESS'
 export const GET_POPULAR_MOVIES_FAILURE = 'shop/App/GET_POPULAR_MOVIES_FAILURE'

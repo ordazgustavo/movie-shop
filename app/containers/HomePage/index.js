@@ -19,6 +19,7 @@ import {
   makeSelectMoviesByGenre,
 } from 'containers/App/selectors'
 import {
+  addToCart,
   getPopularMoviesRequest,
   getTopRatedMoviesRequest,
   getUpcomingMoviesRequest,
@@ -40,6 +41,7 @@ export function HomePage({
   getPopularMovies,
   getTopRatedMovies,
   getUpcomingMovies,
+  addToCartAction,
   moviesByGenre,
   popularMovies,
   topRatedMovies,
@@ -87,21 +89,25 @@ export function HomePage({
         }
         movies={moviesByGenre.data}
         loading={moviesByGenre.loading}
+        addToCartAction={addToCartAction}
       />
       <MovieRail
         title="popularMoviesHeader"
         movies={popularMovies.data}
         loading={popularMovies.loading}
+        addToCartAction={addToCartAction}
       />
       <MovieRail
         title="topRatedMoviesHeader"
         movies={topRatedMovies.data}
         loading={topRatedMovies.loading}
+        addToCartAction={addToCartAction}
       />
       <MovieRail
         title="upcomingMoviesHeader"
         movies={upcomingMovies.data}
         loading={upcomingMovies.loading}
+        addToCartAction={addToCartAction}
       />
     </article>
   )
@@ -112,6 +118,7 @@ HomePage.propTypes = {
   getPopularMovies: PropTypes.func,
   getTopRatedMovies: PropTypes.func,
   getUpcomingMovies: PropTypes.func,
+  addToCartAction: PropTypes.func,
   moviesByGenre: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   popularMovies: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   topRatedMovies: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
@@ -122,6 +129,9 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
+    addToCartAction: movie => {
+      dispatch(addToCart(movie))
+    },
     getMoviesByGenre: () => {
       dispatch(getMoviesByGenreRequest())
     },

@@ -16,6 +16,7 @@
  */
 
 import {
+  ADD_TO_CART,
   GET_POPULAR_MOVIES_REQUEST,
   GET_POPULAR_MOVIES_SUCCESS,
   GET_POPULAR_MOVIES_FAILURE,
@@ -29,6 +30,13 @@ import {
   GET_MOVIES_BY_GENRE_SUCCESS,
   GET_MOVIES_BY_GENRE_FAILURE,
 } from './constants'
+
+export function addToCart(movie) {
+  return {
+    type: ADD_TO_CART,
+    movie,
+  }
+}
 
 export function getPopularMoviesRequest() {
   return {

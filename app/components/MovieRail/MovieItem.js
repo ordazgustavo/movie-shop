@@ -24,18 +24,25 @@ const Item = styled.li`
 `
 const Image = styled.img``
 
-export function MovieItem({ id, image, name }) {
+export function MovieItem({ addToCartAction, id, image, name }) {
   return (
-    <Link to={`/movie/${id}`}>
-      <Item>
+    <Item>
+      <Link to={`/movie/${id}`}>
         <Image src={`${IMAGE_PREFIX_SMALL_URL}${image}`} alt={name} />
-        <Description>{name}</Description>
-      </Item>
-    </Link>
+      </Link>
+      <Description>
+        {name}
+        <Link to={`/movie/${id}`}>Details</Link>
+        <button type="button" onClick={addToCartAction}>
+          Add to cart
+        </button>
+      </Description>
+    </Item>
   )
 }
 
 MovieItem.propTypes = {
+  addToCartAction: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
