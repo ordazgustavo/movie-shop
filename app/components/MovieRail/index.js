@@ -48,15 +48,17 @@ function MovieRail({ addToCartAction, title, subtitle, movies, loading }) {
       {subtitle ? <Subtitle>{subtitle}</Subtitle> : null}
       <Rail>
         {!loading && movies ? (
-          movies.map(movie => (
-            <MovieItem
-              key={movie.id}
-              id={movie.id}
-              image={movie.backdrop_path}
-              name={movie.title}
-              addToCartAction={() => addToCartAction(movie)}
-            />
-          ))
+          movies
+            .filter(movie => !!movie.backdrop_path)
+            .map(movie => (
+              <MovieItem
+                key={movie.id}
+                id={movie.id}
+                image={movie.backdrop_path}
+                name={movie.title}
+                addToCartAction={() => addToCartAction(movie)}
+              />
+            ))
         ) : (
           <div>Loading...</div>
         )}
