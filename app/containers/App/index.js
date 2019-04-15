@@ -14,6 +14,7 @@ import { Switch, Route } from 'react-router-dom'
 import HomePage from 'containers/HomePage/Loadable'
 import MovieDetail from 'containers/MovieDetail/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
+import SearchMovies from 'containers/SearchMovies'
 
 import GlobalStyle from '../../global-styles'
 
@@ -30,6 +31,7 @@ export default function App() {
       <Helmet titleTemplate="%s - Movie Shop" defaultTitle="Movie Shop">
         <meta name="description" content="A Movie eCommerce Site" />
       </Helmet>
+      <SearchMovies />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/movie/:movieId" component={MovieDetail} />
