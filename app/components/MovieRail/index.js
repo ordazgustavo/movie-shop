@@ -14,6 +14,10 @@ import { MovieItem } from './MovieItem'
 
 const Wrapper = styled.div`
   margin: 45px 0;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 `
 
 const Title = styled.h3`
@@ -32,7 +36,8 @@ const Rail = styled.ul`
   flex-wrap: nowrap;
   overflow-y: hidden;
   overflow-x: auto;
-  min-height: 281px;
+  height: 200px;
+  min-height: 200px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -56,6 +61,7 @@ function MovieRail({ addToCartAction, title, subtitle, movies, loading }) {
                 id={movie.id}
                 image={movie.backdrop_path}
                 name={movie.title}
+                overview={movie.overview}
                 addToCartAction={() => addToCartAction(movie)}
               />
             ))
