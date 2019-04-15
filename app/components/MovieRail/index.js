@@ -53,7 +53,7 @@ function MovieRail({ title, subtitle, movies, loading }) {
               key={movie.id}
               id={movie.id}
               image={movie.backdrop_path}
-              name={movie.original_title}
+              name={movie.title}
             />
           ))
         ) : (
