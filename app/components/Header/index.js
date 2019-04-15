@@ -34,13 +34,16 @@ const HeaderLink = styled(Link)`
 
 function Header({ searchBar: Search, cart: Cart }) {
   return (
-    <Wrapper>
-      <HeaderLink to="/">
-        <FormattedMessage {...messages.header} />
-      </HeaderLink>
-      <div>{Search ? <Search /> : null}</div>
-      <div>{Cart ? <Cart /> : null}</div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <HeaderLink to="/">
+          <FormattedMessage {...messages.header} />
+        </HeaderLink>
+        <div>{Search ? <Search /> : null}</div>
+        <div>{Cart ? <Cart /> : null}</div>
+      </Wrapper>
+      <span style={{ display: 'block', height: 56 }} />
+    </>
   )
 }
 
