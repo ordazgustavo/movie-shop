@@ -6,6 +6,7 @@
 
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { FormattedMessage } from 'react-intl'
@@ -22,6 +23,11 @@ import messages from './messages'
 
 const key = 'cartPage'
 
+const Wrapper = styled.section`
+  width: 1000px;
+  margin: auto;
+`
+
 export function CartPage({ cart }) {
   useInjectReducer({ key, reducer })
   useInjectSaga({ key, saga })
@@ -32,8 +38,12 @@ export function CartPage({ cart }) {
         <title>CartPage</title>
         <meta name="description" content="Description of CartPage" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
-      <CartItemsList movies={cart} />
+      <Wrapper>
+        <h2>
+          <FormattedMessage {...messages.header} />
+        </h2>
+        <CartItemsList movies={cart} />
+      </Wrapper>
     </div>
   )
 }
