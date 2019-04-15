@@ -16,6 +16,8 @@ import MovieDetail from 'containers/MovieDetail/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import SearchMovies from 'containers/SearchMovies'
 
+import Header from 'components/Header'
+
 import GlobalStyle from '../../global-styles'
 
 const AppWrapper = styled.div`
@@ -31,7 +33,7 @@ export default function App() {
       <Helmet titleTemplate="%s - Movie Shop" defaultTitle="Movie Shop">
         <meta name="description" content="A Movie eCommerce Site" />
       </Helmet>
-      <SearchMovies />
+      <Header searchBar={SearchMovies} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/movie/:movieId" component={MovieDetail} />

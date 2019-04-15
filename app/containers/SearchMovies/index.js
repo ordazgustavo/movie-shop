@@ -58,9 +58,10 @@ const Item = styled.li`
 
 const Input = styled.input`
   border: 1px solid #fafafa;
-  border-radius: 8px;
+  border-radius: 4px;
   box-sizing: border-box;
   padding: 5px;
+  width: 100%;
 
   &:hover {
     border: 1px solid #c9c9c9;
