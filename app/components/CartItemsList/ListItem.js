@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { media } from 'utils/media-query'
 import { IMAGE_PREFIX_XS_URL } from '../../constants'
 
 const Item = styled.li`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid #fafafa;
@@ -14,10 +15,24 @@ const Item = styled.li`
   :last-of-type {
     border-bottom: 1px solid #fafafa;
   }
+
+  ${media.tablet`
+    flex-direction: row;
+  `}
 `
 
 const CardPoster = styled.img`
   height: 200px;
+`
+
+const Detail = styled.div`
+  flex-grow: 2;
+  padding: 0;
+  text-align: justify;
+
+  ${media.tablet`
+    padding: 0 45px;
+  `}
 `
 
 export function ListItem({ poster_path, title, overview }) {
@@ -26,10 +41,10 @@ export function ListItem({ poster_path, title, overview }) {
       <div style={{ flexGrow: 1 }}>
         <CardPoster src={`${IMAGE_PREFIX_XS_URL}${poster_path}`} alt={title} />
       </div>
-      <div style={{ flexGrow: 2, padding: '0 45px' }}>
+      <Detail>
         <h3>{title}</h3>
         <p>{overview}</p>
-      </div>
+      </Detail>
       <div style={{ flexGrow: 1, alignContent: 'center' }}>
         <button type="button">X</button>
       </div>

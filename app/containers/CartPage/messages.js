@@ -11,6 +11,6 @@ export const scope = 'app.containers.CartPage'
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Your Cart',
+    defaultMessage: 'Cart',
   },
 })

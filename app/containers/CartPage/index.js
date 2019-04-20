@@ -24,8 +24,13 @@ import messages from './messages'
 const key = 'cartPage'
 
 const Wrapper = styled.section`
-  width: 1000px;
-  margin: auto;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 45px;
+`
+
+const Title = styled.h2`
+  margin-top: 0;
 `
 
 export function CartPage({ cart }) {
@@ -39,9 +44,9 @@ export function CartPage({ cart }) {
         <meta name="description" content="Description of CartPage" />
       </Helmet>
       <Wrapper>
-        <h2>
+        <Title>
           <FormattedMessage {...messages.header} />
-        </h2>
+        </Title>
         <CartItemsList movies={cart} />
       </Wrapper>
     </div>
