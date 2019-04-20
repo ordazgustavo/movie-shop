@@ -15,6 +15,7 @@ import { compose } from 'redux'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { addToCart } from 'containers/App/actions'
+import { media } from 'utils/media-query'
 import {
   makeSelectMovieDetail,
   makeSelectMovieDetailLoading,
@@ -23,20 +24,46 @@ import {
 import reducer from './reducer'
 import saga from './saga'
 import { getMovieDetailRequest } from './actions'
-import { IMAGE_PREFIX_XS_URL } from '../../constants'
+import { IMAGE_PREFIX_SMALL_URL } from '../../constants'
 
 const key = 'movieDetail'
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: nowrap;
-  flex-direction: row;
-  width: 1000px;
-  padding: 40px 0;
+  flex-direction: column;
+  max-width: 1000px;
+  padding: 0 0 45px 0;
   margin: 0 auto;
+
+  ${media.desktop`
+    flex-direction: row;
+    padding: 40px 0;
+  `}
 `
+
+const Img = styled.img`
+  width: 100vw;
+
+  ${media.tablet`
+    width: 50%;
+  `}
+
+  ${media.desktop`
+    width: 100%;
+  `}
+`
+
 const MovieTitle = styled.h1`
   margin-top: 0;
+`
+
+const Poster = styled.div`
+  text-align: center;
+`
+
+const Detail = styled.div`
+  padding: 0 45px;
 `
 
 export function MovieDetail({
@@ -67,13 +94,13 @@ export function MovieDetail({
       </Helmet>
       {!loading && movieDetail ? (
         <Wrapper>
-          <div>
-            <img
-              src={`${IMAGE_PREFIX_XS_URL}${movieDetail.poster_path}`}
+          <Poster>
+            <Img
+              src={`${IMAGE_PREFIX_SMALL_URL}${movieDetail.poster_path}`}
               alt={`${movieDetail.title} Poster`}
             />
-          </div>
-          <div style={{ paddingLeft: 40 }}>
+          </Poster>
+          <Detail>
             <MovieTitle>
               {movieDetail.title}{' '}
               <span>({new Date(movieDetail.release_date).getFullYear()})</span>
@@ -83,7 +110,7 @@ export function MovieDetail({
             </button>
             <h4>Overview</h4>
             <p>{movieDetail.overview}</p>
-          </div>
+          </Detail>
         </Wrapper>
       ) : (
         <div>Loading...</div>
