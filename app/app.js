@@ -12,9 +12,11 @@ import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
 import { ConnectedRouter } from 'connected-react-router'
 import FontFaceObserver from 'fontfaceobserver'
 import history from 'utils/history'
+import theme from 'utils/theme'
 import 'sanitize.css/sanitize.css'
 
 // Import root app
@@ -50,9 +52,11 @@ const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <ThemeProvider theme={theme[localStorage.getItem('theme') || 'light']}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </ThemeProvider>
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE,

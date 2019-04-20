@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: ${({ theme }) => theme.font_color};
+    background-color: ${({ theme }) => theme.body_color};
   }
 
   body.fontLoaded {
@@ -28,6 +30,14 @@ const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  a {
+    color: ${({ theme }) => theme.link_color}
+  }
+
+  a:hover {
+    color: ${({ theme }) => theme.link_color_hover}
   }
 `
 

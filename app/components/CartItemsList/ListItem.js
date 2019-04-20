@@ -9,11 +9,11 @@ const Item = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #fafafa;
+  border-top: 1px solid ${({ theme }) => theme.border_color};
   padding: 15px 0;
 
   :last-of-type {
-    border-bottom: 1px solid #fafafa;
+    border-bottom: 1px solid ${({ theme }) => theme.border_color};
   }
 
   ${media.tablet`
