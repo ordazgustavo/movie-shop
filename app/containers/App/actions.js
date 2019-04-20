@@ -17,6 +17,7 @@
 
 import {
   ADD_TO_CART,
+  REMOVE_FROM_CART,
   GET_POPULAR_MOVIES_REQUEST,
   GET_POPULAR_MOVIES_SUCCESS,
   GET_POPULAR_MOVIES_FAILURE,
@@ -35,6 +36,13 @@ export function addToCart(movie) {
   return {
     type: ADD_TO_CART,
     movie,
+  }
+}
+
+export function removeFromCart(movieId) {
+  return {
+    type: REMOVE_FROM_CART,
+    movieId,
   }
 }
 

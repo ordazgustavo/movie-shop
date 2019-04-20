@@ -10,6 +10,7 @@
  */
 
 export const ADD_TO_CART = 'shop/App/ADD_TO_CART'
+export const REMOVE_FROM_CART = 'shop/App/REMOVE_FROM_CART'
 
 export const GET_POPULAR_MOVIES_REQUEST = 'shop/App/GET_POPULAR_MOVIES_REQUEST'
 export const GET_POPULAR_MOVIES_SUCCESS = 'shop/App/GET_POPULAR_MOVIES_SUCCESS'

@@ -16,6 +16,7 @@ import { compose } from 'redux'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { makeSelectCart } from 'containers/App/selectors'
+import { removeFromCart } from 'containers/App/actions'
 import CartItemsList from 'components/CartItemsList/Loadable'
 import reducer from './reducer'
 import saga from './saga'
@@ -33,7 +34,7 @@ const Title = styled.h2`
   margin-top: 0;
 `
 
-export function CartPage({ cart }) {
+export function CartPage({ cart, removeFromCartAction }) {
   useInjectReducer({ key, reducer })
   useInjectSaga({ key, saga })
 
@@ -47,14 +48,17 @@ export function CartPage({ cart }) {
         <Title>
           <FormattedMessage {...messages.header} />
         </Title>
-        <CartItemsList movies={cart} />
+        <CartItemsList
+          movies={cart}
+          removeFromCartAction={removeFromCartAction}
+        />
       </Wrapper>
     </div>
   )
 }
 
 CartPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  removeFromCartAction: PropTypes.func.isRequired,
   cart: PropTypes.array,
 }
 
@@ -64,7 +68,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    removeFromCartAction: id => {
+      dispatch(removeFromCart(id))
+    },
   }
 }
 

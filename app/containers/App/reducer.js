@@ -22,6 +22,7 @@ import {
   GET_MOVIES_BY_GENRE_SUCCESS,
   GET_MOVIES_BY_GENRE_FAILURE,
   ADD_TO_CART,
+  REMOVE_FROM_CART,
 } from './constants'
 
 // The initial state of the App
@@ -55,6 +56,10 @@ const appReducer = (state = initialState, action) =>
     switch (action.type) {
       case ADD_TO_CART:
         draft.cart.push(action.movie)
+        break
+
+      case REMOVE_FROM_CART:
+        draft.cart = draft.cart.filter(movie => movie.id !== action.movieId)
         break
 
       case GET_MOVIES_BY_GENRE_REQUEST:

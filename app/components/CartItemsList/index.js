@@ -14,11 +14,15 @@ const List = styled.ul`
   padding: 0;
 `
 
-function CartItemsList({ movies }) {
+function CartItemsList({ movies, removeFromCartAction }) {
   return (
     <List>
       {movies.map(movie => (
-        <ListItem key={movie.id} {...movie} />
+        <ListItem
+          key={movie.id}
+          {...movie}
+          removeFromCartAction={removeFromCartAction}
+        />
       ))}
     </List>
   )
@@ -26,6 +30,7 @@ function CartItemsList({ movies }) {
 
 CartItemsList.propTypes = {
   movies: PropTypes.array,
+  removeFromCartAction: PropTypes.func.isRequired,
 }
 
 export default CartItemsList

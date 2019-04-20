@@ -35,7 +35,13 @@ const Detail = styled.div`
   `}
 `
 
-export function ListItem({ poster_path, title, overview }) {
+export function ListItem({
+  removeFromCartAction,
+  id,
+  poster_path,
+  title,
+  overview,
+}) {
   return (
     <Item>
       <div style={{ flexGrow: 1 }}>
@@ -46,13 +52,17 @@ export function ListItem({ poster_path, title, overview }) {
         <p>{overview}</p>
       </Detail>
       <div style={{ flexGrow: 1, alignContent: 'center' }}>
-        <button type="button">X</button>
+        <button type="button" onClick={() => removeFromCartAction(id)}>
+          X
+        </button>
       </div>
     </Item>
   )
 }
 
 ListItem.propTypes = {
+  removeFromCartAction: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   poster_path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   overview: PropTypes.string.isRequired,
