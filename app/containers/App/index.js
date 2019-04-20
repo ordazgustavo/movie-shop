@@ -26,6 +26,7 @@ const AppWrapper = styled.div`
   min-height: 100%;
   padding: 0;
   flex-direction: column;
+  overflow-x: hidden;
 `
 
 export default function App() {

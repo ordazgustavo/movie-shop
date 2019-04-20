@@ -16,6 +16,7 @@ import Downshift from 'downshift'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
+import { media } from 'utils/media-query'
 import makeSelectSearchMovies, {
   makeSelectSearchQuery,
   makeSelectSearchItems,
@@ -25,6 +26,14 @@ import saga from './saga'
 import { setSearchQuery } from './actions'
 
 const key = 'searchMovies'
+
+const Wrapper = styled.div`
+  width: 100%;
+
+  ${media.tablet`
+    max-width: 250px;
+  `}
+`
 
 const Menu = styled.ul`
   position: absolute;
@@ -87,6 +96,7 @@ export function SearchMovies({ onInputValueChange, items, history }) {
       itemToString={itemToString}
     >
       {({
+        getRootProps,
         getInputProps,
         getMenuProps,
         getItemProps,
@@ -95,7 +105,7 @@ export function SearchMovies({ onInputValueChange, items, history }) {
         inputValue,
         highlightedIndex,
       }) => (
-        <div style={{ width: 250, margin: 'auto' }}>
+        <Wrapper {...getRootProps()}>
           <div style={{ position: 'relative' }}>
             <Input
               {...getInputProps({
@@ -123,7 +133,7 @@ export function SearchMovies({ onInputValueChange, items, history }) {
                 : null}
             </Menu>
           </div>
-        </div>
+        </Wrapper>
       )}
     </Downshift>
   )
