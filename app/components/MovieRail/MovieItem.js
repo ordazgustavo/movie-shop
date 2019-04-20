@@ -37,7 +37,7 @@ const Item = styled.li`
   margin: 0 5px;
   list-style: none;
   border-radius: 4px;
-  width: 100%;
+  max-width: 356px;
 
   &:hover ${Description} {
     background-color: rgba(143, 22, 185, 0.6);
