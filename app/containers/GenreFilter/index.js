@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
  *
  * GenreFilter
@@ -28,7 +29,6 @@ export function GenreFilter({
   onChangeGenere,
   getGenres,
   genres,
-  error,
   loading,
   genreId,
 }) {
@@ -41,18 +41,17 @@ export function GenreFilter({
     }
   }, [genres])
 
-  console.log(genreId, genres, loading, error)
-
-  return !loading && genres ? (
+  return (
     <select onChange={onChangeGenere} value={genreId || ''}>
-      <option>Select genre</option>
-      {genres.map(genre => (
-        <option key={genre.id} value={genre.id.toString()}>
-          {genre.name}
-        </option>
-      ))}
+      {!loading && genres
+        ? genres.map(genre => (
+            <option key={genre.id} value={genre.id.toString()}>
+              {genre.name}
+            </option>
+          ))
+        : null}
     </select>
-  ) : null
+  )
 }
 
 GenreFilter.propTypes = {
@@ -60,7 +59,6 @@ GenreFilter.propTypes = {
   getGenres: PropTypes.func.isRequired,
   genres: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
   genreId: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
 }
 

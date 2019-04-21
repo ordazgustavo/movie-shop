@@ -63,11 +63,6 @@ export function HomePage({
     }
   }, [genreId])
 
-  console.log('Movies By Genre', moviesByGenre)
-  console.log('Popular Movies', popularMovies)
-  console.log('Top Rated Movies', topRatedMovies)
-  console.log('Upcoming Movies', upcomingMovies)
-
   return (
     <article>
       <Helmet>

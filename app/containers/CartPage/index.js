@@ -48,10 +48,14 @@ export function CartPage({ cart, removeFromCartAction }) {
         <Title>
           <FormattedMessage {...messages.header} />
         </Title>
-        <CartItemsList
-          movies={cart}
-          removeFromCartAction={removeFromCartAction}
-        />
+        {cart.length ? (
+          <CartItemsList
+            movies={cart}
+            removeFromCartAction={removeFromCartAction}
+          />
+        ) : (
+          <FormattedMessage {...messages.noItems} />
+        )}
       </Wrapper>
     </div>
   )

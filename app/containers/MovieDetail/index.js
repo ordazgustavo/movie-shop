@@ -74,7 +74,6 @@ export function MovieDetail({
   match,
   movieDetail,
   loading,
-  error,
   cart,
 }) {
   useInjectSaga({ key, saga })
@@ -94,8 +93,6 @@ export function MovieDetail({
     return !!cart.find(movie => movie.id === movieDetail.id)
   }, [cart, movieDetail])
 
-  console.log(movieDetail, loading, error)
-
   return (
     <div>
       <Helmet>
@@ -105,41 +102,45 @@ export function MovieDetail({
           content={movieDetail ? movieDetail.overview : ''}
         />
       </Helmet>
-      {!loading && movieDetail ? (
-        <Wrapper>
-          <Poster>
-            <Img
-              src={`${IMAGE_PREFIX_SMALL_URL}${movieDetail.poster_path}`}
-              alt={`${movieDetail.title} Poster`}
-            />
-          </Poster>
-          <Detail>
-            <MovieTitle>
-              {movieDetail.title}{' '}
-              <span>({new Date(movieDetail.release_date).getFullYear()})</span>
-            </MovieTitle>
-            {isInCart ? (
-              <button
-                type="button"
-                onClick={() => removeFromCartAction(movieDetail.id)}
-              >
-                Remove from cart
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => addToCartAction(movieDetail)}
-              >
-                Add to cart
-              </button>
-            )}
-            <h4>Overview</h4>
-            <p>{movieDetail.overview}</p>
-          </Detail>
-        </Wrapper>
-      ) : (
-        <div>Loading...</div>
-      )}
+      <Wrapper>
+        {!loading && movieDetail ? (
+          <>
+            <Poster>
+              <Img
+                src={`${IMAGE_PREFIX_SMALL_URL}${movieDetail.poster_path}`}
+                alt={`${movieDetail.title} Poster`}
+              />
+            </Poster>
+            <Detail>
+              <MovieTitle>
+                {movieDetail.title}{' '}
+                <span>
+                  ({new Date(movieDetail.release_date).getFullYear()})
+                </span>
+              </MovieTitle>
+              {isInCart ? (
+                <button
+                  type="button"
+                  onClick={() => removeFromCartAction(movieDetail.id)}
+                >
+                  Remove from cart
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => addToCartAction(movieDetail)}
+                >
+                  Add to cart
+                </button>
+              )}
+              <h4>Overview</h4>
+              <p>{movieDetail.overview}</p>
+            </Detail>
+          </>
+        ) : (
+          <div>Loading...</div>
+        )}
+      </Wrapper>
     </div>
   )
 }
@@ -152,7 +153,6 @@ MovieDetail.propTypes = {
   movieDetail: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
     .isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
   cart: PropTypes.array.isRequired,
 }
 

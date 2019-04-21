@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Cart',
   },
+  noItems: {
+    id: `${scope}.no-items`,
+    defaultMessage: '0 items in cart',
+  },
 })
