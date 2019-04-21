@@ -14,7 +14,8 @@ import { compose } from 'redux'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
-import { addToCart } from 'containers/App/actions'
+import { addToCart, removeFromCart } from 'containers/App/actions'
+import { makeSelectCart } from 'containers/App/selectors'
 import { media } from 'utils/media-query'
 import {
   makeSelectMovieDetail,
@@ -69,10 +70,12 @@ const Detail = styled.div`
 export function MovieDetail({
   getMovieDetail,
   addToCartAction,
+  removeFromCartAction,
   match,
   movieDetail,
   loading,
   error,
+  cart,
 }) {
   useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
@@ -80,6 +83,16 @@ export function MovieDetail({
   React.useEffect(() => {
     getMovieDetail(match.params.movieId)
   }, [match.params.movieId])
+
+  const isInCart = React.useMemo(() => {
+    if (!movieDetail) {
+      return false
+    }
+    if (!cart.length) {
+      return false
+    }
+    return !!cart.find(movie => movie.id === movieDetail.id)
+  }, [cart, movieDetail])
 
   console.log(movieDetail, loading, error)
 
@@ -105,9 +118,21 @@ export function MovieDetail({
               {movieDetail.title}{' '}
               <span>({new Date(movieDetail.release_date).getFullYear()})</span>
             </MovieTitle>
-            <button type="button" onClick={() => addToCartAction(movieDetail)}>
-              Add to cart
-            </button>
+            {isInCart ? (
+              <button
+                type="button"
+                onClick={() => removeFromCartAction(movieDetail.id)}
+              >
+                Remove from cart
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => addToCartAction(movieDetail)}
+              >
+                Add to cart
+              </button>
+            )}
             <h4>Overview</h4>
             <p>{movieDetail.overview}</p>
           </Detail>
@@ -122,17 +147,20 @@ export function MovieDetail({
 MovieDetail.propTypes = {
   getMovieDetail: PropTypes.func.isRequired,
   addToCartAction: PropTypes.func.isRequired,
+  removeFromCartAction: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   movieDetail: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
     .isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
+  cart: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = createStructuredSelector({
   movieDetail: makeSelectMovieDetail(),
   loading: makeSelectMovieDetailLoading(),
   error: makeSelectMovieDetailError(),
+  cart: makeSelectCart(),
 })
 
 function mapDispatchToProps(dispatch) {
@@ -142,6 +170,9 @@ function mapDispatchToProps(dispatch) {
     },
     addToCartAction: movie => {
       dispatch(addToCart(movie))
+    },
+    removeFromCartAction: id => {
+      dispatch(removeFromCart(id))
     },
   }
 }
