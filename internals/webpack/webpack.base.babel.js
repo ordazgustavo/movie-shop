@@ -20,7 +20,7 @@ module.exports = options => ({
   module: {
     rules: [
       {
-        test: /\.js$/, // Transform all .js files required somewhere with Babel
+        test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -113,7 +113,6 @@ module.exports = options => ({
     // drop any unreachable code.
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
-      THE_MOVIE_DB_API_KEY: JSON.stringify(process.env.THE_MOVIE_DB_API_KEY),
     }),
   ]),
   resolve: {
