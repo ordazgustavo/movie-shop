@@ -6,36 +6,36 @@
  *
  */
 
-import React from 'react';
-import { render } from 'react-testing-library';
+import React from 'react'
+import { render } from 'react-testing-library'
 {{#if wantMessages}}
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from 'react-intl'
 {{/if}}
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+// import 'jest-dom/extend-expect' // add some helpful assertions
 
-import {{ properCase name }} from '../index';
+import {{ properCase name }} from '../index'
 {{#if wantMessages}}
-import { DEFAULT_LOCALE } from '../../../i18n';
+import { DEFAULT_LOCALE } from '../../../i18n'
 {{/if}}
 
 describe('<{{ properCase name }} />', () => {
   it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
+    const spy = jest.spyOn(global.console, 'error')
 {{#if wantMessages}}
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <{{ properCase name }} />
       </IntlProvider>,
-    );
+    )
 {{else}}
-    render(<{{ properCase name }} />);
+    render(<{{ properCase name }} />)
 {{/if}}
-    expect(spy).not.toHaveBeenCalled();
-  });
+    expect(spy).not.toHaveBeenCalled()
+  })
 
   it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+    expect(true).toEqual(false)
+  })
 
   /**
    * Unskip this test to use it
@@ -50,12 +50,12 @@ describe('<{{ properCase name }} />', () => {
       <IntlProvider locale={DEFAULT_LOCALE}>
         <{{ properCase name }} />
       </IntlProvider>,
-    );
+    )
 {{else}}
     const {
       container: { firstChild },
-    } = render(<{{ properCase name }} />);
+    } = render(<{{ properCase name }} />)
 {{/if}}
-    expect(firstChild).toMatchSnapshot();
-  });
-});
+    expect(firstChild).toMatchSnapshot()
+  })
+})
