@@ -3,10 +3,10 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import request from 'utils/request'
 import { GET_MOVIE_DETAIL_REQUEST } from './constants'
 import { getMovieDetailSuccess, getMovieDetailFailure } from './actions'
-import { makeSelectMovieId } from './selectors'
+import { makeSelectMovieDetailId } from './selectors'
 
 export function* getMovieDetail() {
-  const movieId = yield select(makeSelectMovieId())
+  const movieId = yield select(makeSelectMovieDetailId())
   const requestURL = `/movie/${movieId}?language=en-US&page=1`
 
   try {

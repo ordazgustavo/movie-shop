@@ -117,10 +117,7 @@ export function SearchMovies({ onInputValueChange, items, history }) {
             />
           </div>
           <div style={{ position: 'relative' }}>
-            <Menu
-              data-testid="search-movies-menu"
-              {...getMenuProps({ isOpen })}
-            >
+            <Menu {...getMenuProps({ isOpen })}>
               {isOpen && items
                 ? getItems(inputValue, items).map((item, index) => (
                     <Item

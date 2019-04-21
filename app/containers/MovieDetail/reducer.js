@@ -13,7 +13,7 @@ import {
 export const initialState = {
   loading: false,
   error: false,
-  movieDetail: false,
+  movie: false,
   movieId: false,
 }
 
@@ -24,13 +24,13 @@ const movieDetailReducer = (state = initialState, action) =>
       case GET_MOVIE_DETAIL_REQUEST:
         draft.loading = true
         draft.error = false
-        draft.movieDetail = false
+        draft.movie = false
         draft.movieId = action.movieId
         break
 
       case GET_MOVIE_DETAIL_SUCCESS:
         draft.loading = false
-        draft.movieDetail = action.movieDetail
+        draft.movie = action.movieDetail
         break
 
       case GET_MOVIE_DETAIL_FAILURE:
