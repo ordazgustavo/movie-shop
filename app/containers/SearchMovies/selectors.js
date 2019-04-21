@@ -33,9 +33,9 @@ const makeSelectSearchMovies = () =>
     substate => substate,
   )
 
-export default makeSelectSearchMovies
 export {
   selectSearchMoviesDomain,
+  makeSelectSearchMovies,
   makeSelectSearchQuery,
   makeSelectSearchItems,
 }
