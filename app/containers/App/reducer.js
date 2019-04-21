@@ -27,7 +27,9 @@ import {
 
 // The initial state of the App
 export const initialState = {
-  cart: [],
+  cart: localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart'))
+    : [],
   moviesByGenre: {
     error: false,
     loading: false,
@@ -56,10 +58,12 @@ const appReducer = (state = initialState, action) =>
     switch (action.type) {
       case ADD_TO_CART:
         draft.cart.push(action.movie)
+        localStorage.setItem('cart', JSON.stringify(draft.cart))
         break
 
       case REMOVE_FROM_CART:
         draft.cart = draft.cart.filter(movie => movie.id !== action.movieId)
+        localStorage.setItem('cart', JSON.stringify(draft.cart))
         break
 
       case GET_MOVIES_BY_GENRE_REQUEST:
