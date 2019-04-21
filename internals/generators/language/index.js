@@ -67,7 +67,7 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)/g,
+      pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\)\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\)\n)/g,
       templateFile: './language/translation-messages.hbs',
     });
     actions.push({
@@ -108,4 +108,4 @@ module.exports = {
 
     return actions;
   },
-};
+}
