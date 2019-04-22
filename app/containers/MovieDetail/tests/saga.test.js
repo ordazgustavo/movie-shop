@@ -44,10 +44,10 @@ describe('getMovieDetail Saga', () => {
 })
 
 describe('movieDetailSaga Saga', () => {
-  const githubDataSaga = movieDetailSaga()
+  const movieDetailSagaGenerator = movieDetailSaga()
 
-  it('should start task to watch for SET_SEARCH_QUERY action', () => {
-    const takeLatestDescriptor = githubDataSaga.next().value
+  it('should start task to watch for GET_MOVIE_DETAIL_REQUEST action', () => {
+    const takeLatestDescriptor = movieDetailSagaGenerator.next().value
     expect(takeLatestDescriptor).toEqual(
       takeLatest(GET_MOVIE_DETAIL_REQUEST, getMovieDetail),
     )

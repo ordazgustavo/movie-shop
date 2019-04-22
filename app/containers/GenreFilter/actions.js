@@ -8,7 +8,7 @@ import {
   GET_GENRES_REQUEST,
   GET_GENRES_SUCCESS,
   GET_GENRES_FAILURE,
-  CHANGE_GENERE,
+  CHANGE_GENRE,
 } from './constants'
 
 export function getGenresRequest() {
@@ -31,9 +31,9 @@ export function getGenresFailure(error) {
   }
 }
 
-export function changeGenere(genereId) {
+export function changeGenre(genreId) {
   return {
-    type: CHANGE_GENERE,
-    genereId,
+    type: CHANGE_GENRE,
+    genreId,
   }
 }

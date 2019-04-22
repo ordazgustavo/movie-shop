@@ -48,10 +48,10 @@ describe('searchMovies Saga', () => {
 })
 
 describe('searchMoviesSaga Saga', () => {
-  const githubDataSaga = searchMoviesSaga()
+  const searchMoviesSagaGenerator = searchMoviesSaga()
 
   it('should start task to watch for SET_SEARCH_QUERY action', () => {
-    const takeLatestDescriptor = githubDataSaga.next().value
+    const takeLatestDescriptor = searchMoviesSagaGenerator.next().value
     expect(takeLatestDescriptor).toEqual(
       takeLatest(SET_SEARCH_QUERY, searchMovies),
     )
