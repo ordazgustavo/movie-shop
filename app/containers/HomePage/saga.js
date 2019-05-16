@@ -54,8 +54,8 @@ export function* getUpcomingMovies() {
 }
 
 export function* getMoviesByGenre() {
-  const genereId = yield select(makeSelectGenreId())
-  const requestURL = `/discover/movie?sort_by=popularity.desc&include_video=false&language=en-US&page=1&with_genres=${genereId}`
+  const genreId = yield select(makeSelectGenreId())
+  const requestURL = `/discover/movie?sort_by=popularity.desc&include_video=false&language=en-US&page=1&with_genres=${genreId}`
 
   try {
     const moviesByGenre = yield call(request, requestURL)

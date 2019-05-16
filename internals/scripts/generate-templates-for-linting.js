@@ -384,4 +384,4 @@ async function generateLanguage(language) {
   ]).catch(reason => reportErrors(reason));
 
   await generateLanguage('fr').catch(reason => reportErrors(reason));
-})();
+})()

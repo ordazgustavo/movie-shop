@@ -8,7 +8,7 @@ import {
   GET_GENRES_REQUEST,
   GET_GENRES_SUCCESS,
   GET_GENRES_FAILURE,
-  CHANGE_GENERE,
+  CHANGE_GENRE,
 } from './constants'
 
 export const initialState = {
@@ -39,8 +39,8 @@ const genreFilterReducer = (state = initialState, action) =>
         draft.error = action.error
         break
 
-      case CHANGE_GENERE:
-        draft.selectedGenre = action.genereId
+      case CHANGE_GENRE:
+        draft.selectedGenre = action.genreId
         break
     }
   })

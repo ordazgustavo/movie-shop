@@ -7,32 +7,57 @@
  */
 
 import React from 'react'
-import { render } from 'react-testing-library'
+import { cleanup } from 'react-testing-library'
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
+import { renderWithRedux } from 'utils/render-with-redux'
 import { GenreFilter } from '../index'
 
+afterEach(cleanup)
+
+const genres = [{ id: 1, name: 'Action' }, { id: 2, name: 'Adventure' }]
+
 describe('<GenreFilter />', () => {
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error')
-    const dispatch = jest.fn()
-    render(<GenreFilter dispatch={dispatch} />)
-    expect(spy).not.toHaveBeenCalled()
+  it('should render with redux', () => {
+    const { getByTestId } = renderWithRedux(
+      <GenreFilter
+        onChangeGenre={() => {}}
+        getGenres={() => {}}
+        genres
+        loading
+        genreId={false}
+      />,
+    )
+
+    expect(getByTestId('genre-filter-select')).toBeTruthy()
   })
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false)
+  it('should select genre by id', () => {
+    const { getByTestId } = renderWithRedux(
+      <GenreFilter
+        onChangeGenre={() => {}}
+        getGenres={() => {}}
+        genres={genres}
+        loading={false}
+        genreId="1"
+      />,
+    )
+
+    const select = getByTestId('genre-filter-select')
+    expect(select.value).toEqual('1')
   })
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<GenreFilter />)
-    expect(firstChild).toMatchSnapshot()
+  it('should select genre by id', () => {
+    const { getBySelectText } = renderWithRedux(
+      <GenreFilter
+        onChangeGenre={() => {}}
+        getGenres={() => {}}
+        genres={genres}
+        loading={false}
+        genreId="2"
+      />,
+    )
+
+    expect(getBySelectText('Adventure')).toBeTruthy()
   })
 })

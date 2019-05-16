@@ -18,7 +18,7 @@ import { addToCart, removeFromCart } from 'containers/App/actions'
 import { makeSelectCart } from 'containers/App/selectors'
 import { media } from 'utils/media-query'
 import {
-  makeSelectMovieDetail,
+  makeSelectMovieDetailMovie,
   makeSelectMovieDetailLoading,
   makeSelectMovieDetailError,
 } from './selectors'
@@ -72,7 +72,7 @@ export function MovieDetail({
   addToCartAction,
   removeFromCartAction,
   match,
-  movieDetail,
+  movie,
   loading,
   cart,
 }) {
@@ -84,61 +84,58 @@ export function MovieDetail({
   }, [match.params.movieId])
 
   const isInCart = React.useMemo(() => {
-    if (!movieDetail) {
+    if (!movie) {
       return false
     }
     if (!cart.length) {
       return false
     }
-    return !!cart.find(movie => movie.id === movieDetail.id)
-  }, [cart, movieDetail])
+    return !!cart.find(m => m.id === movie.id)
+  }, [cart, movie])
 
   return (
     <div>
       <Helmet>
-        <title>{movieDetail ? movieDetail.title : ''}</title>
-        <meta
-          name="description"
-          content={movieDetail ? movieDetail.overview : ''}
-        />
+        <title>{movie ? movie.title : ''}</title>
+        <meta name="description" content={movie ? movie.overview : ''} />
       </Helmet>
-      <Wrapper>
-        {!loading && movieDetail ? (
+      <Wrapper data-testid="movie-detail-wrapper">
+        {!loading && movie ? (
           <>
             <Poster>
               <Img
-                src={`${IMAGE_PREFIX_SMALL_URL}${movieDetail.poster_path}`}
-                alt={`${movieDetail.title} Poster`}
+                src={`${IMAGE_PREFIX_SMALL_URL}${movie.poster_path}`}
+                alt={`${movie.title} Poster`}
               />
             </Poster>
             <Detail>
               <MovieTitle>
-                {movieDetail.title}{' '}
-                <span>
-                  ({new Date(movieDetail.release_date).getFullYear()})
-                </span>
+                {movie.title}{' '}
+                <span>{`(${new Date(movie.release_date).getFullYear()})`}</span>
               </MovieTitle>
               {isInCart ? (
                 <button
+                  data-testid="movie-detail-remove-cart"
                   type="button"
-                  onClick={() => removeFromCartAction(movieDetail.id)}
+                  onClick={() => removeFromCartAction(movie.id)}
                 >
                   Remove from cart
                 </button>
               ) : (
                 <button
+                  data-testid="movie-detail-add-cart"
                   type="button"
-                  onClick={() => addToCartAction(movieDetail)}
+                  onClick={() => addToCartAction(movie)}
                 >
                   Add to cart
                 </button>
               )}
               <h4>Overview</h4>
-              <p>{movieDetail.overview}</p>
+              <p>{movie.overview}</p>
             </Detail>
           </>
         ) : (
-          <div>Loading...</div>
+          <div data-testid="movie-detail-loading">Loading...</div>
         )}
       </Wrapper>
     </div>
@@ -146,18 +143,17 @@ export function MovieDetail({
 }
 
 MovieDetail.propTypes = {
-  getMovieDetail: PropTypes.func.isRequired,
-  addToCartAction: PropTypes.func.isRequired,
-  removeFromCartAction: PropTypes.func.isRequired,
+  getMovieDetail: PropTypes.func,
+  addToCartAction: PropTypes.func,
+  removeFromCartAction: PropTypes.func,
   match: PropTypes.object.isRequired,
-  movieDetail: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
-    .isRequired,
+  movie: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   loading: PropTypes.bool.isRequired,
   cart: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = createStructuredSelector({
-  movieDetail: makeSelectMovieDetail(),
+  movie: makeSelectMovieDetailMovie(),
   loading: makeSelectMovieDetailLoading(),
   error: makeSelectMovieDetailError(),
   cart: makeSelectCart(),

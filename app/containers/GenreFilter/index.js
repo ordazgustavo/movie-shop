@@ -21,12 +21,12 @@ import {
 } from './selectors'
 import reducer from './reducer'
 import saga from './saga'
-import { getGenresRequest, changeGenere } from './actions'
+import { getGenresRequest, changeGenre } from './actions'
 
 const key = 'genreFilter'
 
 export function GenreFilter({
-  onChangeGenere,
+  onChangeGenre,
   getGenres,
   genres,
   loading,
@@ -42,7 +42,11 @@ export function GenreFilter({
   }, [genres])
 
   return (
-    <select onChange={onChangeGenere} value={genreId || ''}>
+    <select
+      data-testid="genre-filter-select"
+      onChange={onChangeGenre}
+      value={genreId || ''}
+    >
       {!loading && genres
         ? genres.map(genre => (
             <option key={genre.id} value={genre.id.toString()}>
@@ -55,7 +59,7 @@ export function GenreFilter({
 }
 
 GenreFilter.propTypes = {
-  onChangeGenere: PropTypes.func.isRequired,
+  onChangeGenre: PropTypes.func.isRequired,
   getGenres: PropTypes.func.isRequired,
   genres: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]).isRequired,
   loading: PropTypes.bool.isRequired,
@@ -71,8 +75,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeGenere: event => {
-      dispatch(changeGenere(event.target.value))
+    onChangeGenre: event => {
+      dispatch(changeGenre(event.target.value))
     },
     getGenres: () => {
       dispatch(getGenresRequest())

@@ -55,7 +55,7 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\);\n)+/g,
+      pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\)\n)+/g,
       templateFile: './language/intl-locale-data.hbs',
     });
     actions.push({
@@ -67,13 +67,13 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)/g,
+      pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\)\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\)\n)/g,
       templateFile: './language/translation-messages.hbs',
     });
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(addLocaleData\([a-z]+LocaleData\);\n)(?!.*addLocaleData\([a-z]+LocaleData\);)/g,
+      pattern: /(addLocaleData\([a-z]+LocaleData\)\n)(?!.*addLocaleData\([a-z]+LocaleData\))/g,
       templateFile: './language/add-locale-data.hbs',
     });
     actions.push({
@@ -108,4 +108,4 @@ module.exports = {
 
     return actions;
   },
-};
+}

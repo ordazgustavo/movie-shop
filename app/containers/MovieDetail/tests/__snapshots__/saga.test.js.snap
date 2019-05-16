@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 1`] = `
+exports[`getMovieDetail Saga should call the getMovieDetailFailure action if the response errors 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -12,13 +12,13 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 2`] = `
+exports[`getMovieDetail Saga should call the getMovieDetailFailure action if the response errors 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
+      "/movie/123?language=en-US&page=1",
     ],
     "context": null,
     "fn": [Function],
@@ -27,7 +27,7 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 1`] = `
+exports[`getMovieDetail Saga should dispatch the getMovieDetailSuccess action if it requests the data successfully 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -39,13 +39,13 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 2`] = `
+exports[`getMovieDetail Saga should dispatch the getMovieDetailSuccess action if it requests the data successfully 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
+      "/movie/123?language=en-US&page=1",
     ],
     "context": null,
     "fn": [Function],

@@ -17,10 +17,7 @@ import Downshift from 'downshift'
 import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 import { media } from 'utils/media-query'
-import makeSelectSearchMovies, {
-  makeSelectSearchQuery,
-  makeSelectSearchItems,
-} from './selectors'
+import { makeSelectSearchQuery, makeSelectSearchItems } from './selectors'
 import reducer from './reducer'
 import saga from './saga'
 import { setSearchQuery } from './actions'
@@ -112,6 +109,7 @@ export function SearchMovies({ onInputValueChange, items, history }) {
         <Wrapper {...getRootProps()}>
           <div style={{ position: 'relative' }}>
             <Input
+              data-testid="search-movies-input"
               {...getInputProps({
                 isOpen,
                 placeholder: 'Enter a movie name',
@@ -151,7 +149,6 @@ SearchMovies.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  searchMovies: makeSelectSearchMovies(),
   query: makeSelectSearchQuery(),
   items: makeSelectSearchItems(),
 })

@@ -13,16 +13,10 @@ import { FormattedMessage } from 'react-intl'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { useInjectSaga } from 'utils/injectSaga'
-import { useInjectReducer } from 'utils/injectReducer'
 import { makeSelectCart } from 'containers/App/selectors'
 import { removeFromCart } from 'containers/App/actions'
 import CartItemsList from 'components/CartItemsList/Loadable'
-import reducer from './reducer'
-import saga from './saga'
 import messages from './messages'
-
-const key = 'cartPage'
 
 const Wrapper = styled.section`
   max-width: 1000px;
@@ -35,16 +29,13 @@ const Title = styled.h2`
 `
 
 export function CartPage({ cart, removeFromCartAction }) {
-  useInjectReducer({ key, reducer })
-  useInjectSaga({ key, saga })
-
   return (
     <div>
       <Helmet>
         <title>CartPage</title>
         <meta name="description" content="Description of CartPage" />
       </Helmet>
-      <Wrapper>
+      <Wrapper data-testid="cart-page-wrapper">
         <Title>
           <FormattedMessage {...messages.header} />
         </Title>
@@ -62,8 +53,8 @@ export function CartPage({ cart, removeFromCartAction }) {
 }
 
 CartPage.propTypes = {
-  removeFromCartAction: PropTypes.func.isRequired,
-  cart: PropTypes.array,
+  removeFromCartAction: PropTypes.func,
+  cart: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = createStructuredSelector({

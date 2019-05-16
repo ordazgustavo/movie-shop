@@ -7,42 +7,55 @@
  */
 
 import React from 'react'
-import { render } from 'react-testing-library'
-import { IntlProvider } from 'react-intl'
+import { cleanup } from 'react-testing-library'
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
+import { renderWithReactIntl } from 'utils/render-with-intl'
 import { CartPage } from '../index'
-import { DEFAULT_LOCALE } from '../../../i18n'
+
+afterEach(cleanup)
 
 describe('<CartPage />', () => {
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error')
-    const dispatch = jest.fn()
-    render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <CartPage dispatch={dispatch} />
-      </IntlProvider>,
+  it('should render without crashing', () => {
+    const { getByTestId } = renderWithReactIntl(
+      <CartPage cart={[]} removeFromCartAction={() => {}} />,
     )
-    expect(spy).not.toHaveBeenCalled()
+
+    expect(getByTestId('cart-page-wrapper')).toBeTruthy()
   })
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false)
+  it('should render with empty cart', () => {
+    const { getByText } = renderWithReactIntl(
+      <CartPage cart={[]} removeFromCartAction={() => {}} />,
+    )
+
+    expect(getByText('0 items in cart')).toBeTruthy()
   })
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <CartPage />
-      </IntlProvider>,
+  it('should render movies in cart', () => {
+    const { getByText } = renderWithReactIntl(
+      <CartPage
+        cart={[
+          {
+            id: 1,
+            poster_path: 'qe123.jpg',
+            title: 'Avengers',
+            overview: 'Superheroes',
+          },
+          {
+            id: 2,
+            poster_path: 'qw123.jpg',
+            title: 'Whiplash',
+            overview: 'Not quite my TEMPO!',
+          },
+        ]}
+        removeFromCartAction={() => {}}
+      />,
     )
-    expect(firstChild).toMatchSnapshot()
+
+    expect(getByText('Avengers')).toBeTruthy()
+    expect(getByText('Superheroes')).toBeTruthy()
+    expect(getByText('Whiplash')).toBeTruthy()
+    expect(getByText('Not quite my TEMPO!')).toBeTruthy()
   })
 })

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getGenres Saga should dispatch the getGenresSuccess action if it requests the data successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "/genre/movie/list?language=en-US&page=1",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;

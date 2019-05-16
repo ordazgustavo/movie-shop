@@ -15,16 +15,16 @@ const selectMovieDetailDomain = state => state.movieDetail || initialState
  * Default selector used by MovieDetail
  */
 
-const makeSelectMovieId = () =>
+const makeSelectMovieDetailId = () =>
   createSelector(
     selectMovieDetailDomain,
     movieState => movieState.movieId,
   )
 
-const makeSelectMovieDetail = () =>
+const makeSelectMovieDetailMovie = () =>
   createSelector(
     selectMovieDetailDomain,
-    movieState => movieState.movieDetail,
+    movieState => movieState.movie,
   )
 
 const makeSelectMovieDetailLoading = () =>
@@ -39,11 +39,11 @@ const makeSelectMovieDetailError = () =>
     movieState => movieState.error,
   )
 
-export default makeSelectMovieDetail
+export default makeSelectMovieDetailMovie
 export {
   selectMovieDetailDomain,
-  makeSelectMovieId,
-  makeSelectMovieDetail,
+  makeSelectMovieDetailId,
+  makeSelectMovieDetailMovie,
   makeSelectMovieDetailLoading,
   makeSelectMovieDetailError,
 }
