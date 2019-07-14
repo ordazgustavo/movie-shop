@@ -47,7 +47,7 @@ list of the dependencies is to check
 ### Unit Testing
 
 - [ ] [Jest](http://facebook.github.io/jest/)
-- [ ] [react-testing-library](https://github.com/kentcdodds/react-testing-library)
+- [ ] [@testing-library/react](https://github.com/kentcdodds/@testing-library/react)
 
 ### Linting
 
